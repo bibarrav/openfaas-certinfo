@@ -6,4 +6,4 @@ functions:
   certinfo:
     lang: go
     handler: ./certinfo
-    image: stefanprodan/certinfo
+    image: bibarrav/certinfo:latest
