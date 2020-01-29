@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 	"time"
-
+	"encoding/base64"
 	"github.com/dustin/go-humanize"
 )
 
@@ -78,7 +78,8 @@ func Handle(req []byte) string {
 		}
 		return string(b)
 	}
-
-	return fmt.Sprintf("Host %v\nPort %v\nIssuer %v\nCommonName %v\nNotBefore %v\nNotAfter %v\nNotAfterUnix %v\nSANs %v\nTimeRemaining %v",
+	var result = fmt.Sprintf("Host %v\nPort %v\nIssuer %v\nCommonName %v\nNotBefore %v\nNotAfter %v\nNotAfterUnix %v\nSANs %v\nTimeRemaining %v",
 		host, port, cert.Issuer.CommonName, cert.Subject.CommonName, cert.NotBefore, cert.NotAfter, cert.NotAfter.Unix(), cert.DNSNames, humanize.Time(cert.NotAfter))
+	var StdEncoding = NewEncoding(result)
+	return StdEncoding
 }
